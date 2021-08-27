@@ -7,10 +7,10 @@ import {NavLink} from "react-router-dom";
 //    'active': Back_active'
 // }
 
-let c1 = "item";
-let c2 = "active";
-let classes = c1 + "" + c2;
-let classesNew = `${s.item} ${s.active}`;
+// let c1 = "item";
+// let c2 = "active";
+// let classes = c1 + "" + c2;
+// let classesNew = `${s.item} ${s.active}`;
 
 
 const Navbar = () => {
@@ -30,6 +30,9 @@ const Navbar = () => {
       </div>
       <div className={s.item}>
         <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
+      </div>
+      <div className={s.item}>
+        <NavLink to="/friends" activeClassName={s.active}>Friends</NavLink>
       </div>
     </nav>
   )
