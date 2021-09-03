@@ -2,24 +2,28 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/state';
 const Dialogs = (props) =>{
 
+    let state = props.store.getState().dialogsPage;
 
-    let dialogsElements = props.state.dialogs.
+
+    let dialogsElements = state.dialogs.
     map( d => <DialogItem name = {d.name} id = {d.id}/>);
 
-    let messageElements = props.state.messages.
+    let messageElements = state.messages.
     map(m => <Message message={m.message} />)
 
-    let newMessageElement = React.createRef();
-    
-    let addMessage = ()=> {
-        props.addMessage();
+    let newMessageText = state.newMessageText;
+
+
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator());
     }
 
-    let onMessageChange = () => {
-        let text = newMessageElement.current.value;
-        props.updateNewMessageText(text);
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.store.dispatch(updateNewMessageBodyCreator(body));
     }
 
     return (
@@ -36,13 +40,12 @@ const Dialogs = (props) =>{
                 {/* <Message message={messagesData[0].message} />
                 <Message message={messagesData[1].message} />
                 <Message message={messagesData[2].message}/> */}
-                {messageElements}
-            </div>
-            <div>
-                <textarea onChange={onMessageChange} ref={newMessageElement} value={props.newMessageText}></textarea>
-            </div>
-            <div>
-                <button onClick={addMessage}>Add message</button>
+                <div>{messageElements}</div>
+                <div>
+                    <div><textarea value={newMessageText}
+                    onChange={onNewMessageChange} placeholder='Enter your message'></textarea></div>
+                    <div><button onClick={ (onSendMessageClick)}>Send</button></div>
+                </div>
             </div>
         </div>
     )
