@@ -4,6 +4,7 @@ import Profile from './components/Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Music from './components/Music/Music';
+import Users from './components/Users/Users';
 import Settings from './components/Settings/Settings';
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -29,7 +30,7 @@ const App = (props) => {
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
           <Route path='/settings' render={() => <Settings />} />
-
+          <Route path='/users' render ={() => <Users />} />
         </div>
       </div>
     </BrowserRouter>
